@@ -1,120 +1,209 @@
 # 🧩 Gesture Puzzle v2
 
-A real-time gesture-controlled puzzle game built with **OpenCV** and **MediaPipe**.  
-No mouse. No keyboard. Just your hands.
+An interactive hand gesture–controlled sliding puzzle game built with **OpenCV** and **MediaPipe Hands**. Control the game entirely through natural hand movements—no mouse or keyboard required.
+
+## 🎯 Features
+
+### 🎮 Gesture-Based Interaction
+- Real-time hand tracking using MediaPipe
+- Smooth gesture-controlled cursor
+- Pinch gesture for selecting and moving puzzle tiles
+- Open-palm gesture for starting, pausing, and resuming gameplay
+- Thumbs-up gesture for restarting the puzzle or returning to the main menu
+
+### 🧩 Multiple Difficulty Levels
+Choose from three puzzle sizes:
+
+| Difficulty | Grid Size |
+|------------|-----------|
+| Easy | 3 × 3 |
+| Medium | 4 × 4 |
+| Hard | 5 × 5 |
+
+### 🖼 Multiple Image Sources
+- Use a live camera frame as the puzzle image
+- Select from preloaded local images
+
+### 📊 Advanced Gameplay Features
+- Move counter
+- Real-time timer
+- Performance-based scoring system
+- Best-score tracking per difficulty level
+- Puzzle completion statistics
+- Hint system with limited uses
+- Pause and resume functionality
+
+### ✨ Enhanced User Experience
+- Animated gesture cursor
+- Smooth cursor trail effects
+- Tile hover highlighting
+- Shuffle animation before gameplay
+- Confetti celebration on completion
+- Clean heads-up display (HUD)
+- Gesture-controlled navigation menus
 
 ---
 
-## ✨ What's New in v2
+## 🛠 Technologies Used
 
-| Feature | v1 | v2 |
-|---|---|---|
-| Difficulty levels | Fixed 3×3 | Easy / Medium / Hard (3×3 → 5×5) |
-| Main menu | ❌ | ✅ Gesture-navigable menu |
-| Image source | Camera only | Camera + Preloaded images |
-| Move counter | ❌ | ✅ Real-time |
-| Scoring | ❌ | ✅ Score = f(time, moves); best score saved |
-| Hint system | ❌ | ✅ 3 hints per game (press `h`) |
-| Pause | ❌ | ✅ Open palm gesture |
-| Restart | ❌ | ✅ Thumbs-up gesture |
-| Tile hover | ❌ | ✅ Subtle highlight under cursor |
-| Win screen | Basic text | ✅ Confetti + stats + score |
-| Cursor | Static dot | ✅ Adaptive, animated cursor |
-| Trail | Static | ✅ Fading color trail |
-| HUD | Scattered | ✅ Clean top/bottom bars |
-| Architecture | 1 file | ✅ 4 modules |
+- Python
+- OpenCV
+- MediaPipe Hands
+- NumPy
 
 ---
 
-## 🛠 Installation
+## 📂 Project Structure
+
+```text
+Gesture-Puzzle-v2/
+│
+├── main.py            # Application entry point
+├── hand_tracker.py    # Hand tracking and gesture detection
+├── puzzle.py          # Puzzle generation and game logic
+├── ui_manager.py      # Rendering and UI components
+├── game_manager.py    # State management and scoring
+│
+├── requirements.txt
+├── README.md
+└── assets/
+```
+
+---
+
+## 🚀 Installation
+
+### Clone the Repository
 
 ```bash
-git clone https://github.com/molly22-byte/hand-gesture-puzzle.git
-cd hand-gesture-puzzle
+git clone https://github.com/your-username/gesture-puzzle-v2.git
+cd gesture-puzzle-v2
+```
+
+### Install Dependencies
+
+```bash
 pip install -r requirements.txt
+```
+
+### Run the Application
+
+```bash
 python main.py
 ```
 
 ---
 
-## 🎮 Gesture Controls
+## 🎮 Controls
 
-| Gesture | Action |
-|---|---|
-| ☝️ **Index finger** | Move cursor |
-| 🤏 **Pinch** | Select / drag tile; choose menu option |
-| 🖐️ **Open palm** (hold 1s) | Start game from menu / Pause in game |
-| 👍 **Thumbs up** (hold 1s) | Restart puzzle / Back to menu from win screen |
-| ✌️ **Both index fingers** | Frame puzzle area (camera mode) |
+### Hand Gestures
 
-### Keyboard shortcuts
-| Key | Action |
-|---|---|
-| `H` | Activate hint (keyboard fallback) |
-| `M` | Return to main menu |
-| `ESC` | Quit |
+| Gesture | Function |
+|----------|----------|
+| ☝️ Index Finger | Move cursor |
+| 🤏 Pinch | Select and drag puzzle pieces |
+| 🖐️ Open Palm (hold 1 second) | Start game / Pause / Resume |
+| 👍 Thumbs Up (hold 1 second) | Restart puzzle / Return to menu |
+| ✌️ Two Index Fingers | Define puzzle area in camera mode |
+
+### Keyboard Shortcuts
+
+| Key | Function |
+|-----|----------|
+| H | Use a hint |
+| M | Return to main menu |
+| ESC | Exit application |
 
 ---
 
-## 🧠 UX Flow
+## 🔄 Game Flow
 
-```
+```text
 Main Menu
-  ↓ (select difficulty + source → open palm)
-Camera Mode      OR      Preloaded Image
-  ↓ (frame area + pinch)        ↓ (auto)
+    │
+    ├── Select Difficulty
+    │
+    ├── Select Image Source
+    │
+    ▼
+Puzzle Generation
+    │
+    ▼
 Shuffle Animation
-  ↓
-Gameplay  ──── (open palm) ──→ Paused ──── (open palm) ──→ resume
-  ↓                               ↓ (thumbs up)
-Win Screen ←─────────────── restart
-  ↓ (thumbs up)
+    │
+    ▼
+Gameplay
+    │
+    ├── Open Palm → Pause
+    ├── Hint System
+    └── Thumbs Up → Restart
+    │
+    ▼
+Puzzle Solved
+    │
+    ▼
+Win Screen
+    │
+    ▼
 Main Menu
 ```
 
 ---
 
-## 📁 Project Structure
+## 💡 Adding Custom Images
 
-```
-main.py           # Main loop + orchestration
-hand_tracker.py   # MediaPipe hand tracking + gesture detection
-puzzle.py         # Tile logic, hints, hover, scoring
-ui_manager.py     # All rendering: menu, HUD, win screen, confetti
-game_manager.py   # State machine, difficulty, scores
-requirements.txt
-README.md
-```
+Place image files inside the project directory and update the image list in `main.py`.
 
----
-
-## 🖼 Adding Preloaded Images
-
-Drop `.jpg` or `.png` files into the project folder and update `PRELOADED_IMAGES` at the top of `main.py`:
+Example:
 
 ```python
 PRELOADED_IMAGES = [
-    "my_photo.jpg",
-    "landscape.png",
+    "landscape.jpg",
+    "mountains.png",
+    "my_photo.jpg"
 ]
 ```
 
----
+Supported formats:
 
-## 📊 Scoring
-
-```
-Score = max(0, 10000 - elapsed_seconds × 10 - moves × 50)
-```
-
-Best score is saved per difficulty level for the session.
+- JPG
+- JPEG
+- PNG
 
 ---
 
-## 🚀 v3 Ideas
+## 📈 Scoring System
 
-- 🎮 Multiplayer race mode
-- 🌐 Web version (MediaPipe JS)
-- 📱 Mobile (touch + gesture)
-- 🔊 Sound feedback
-- 🏆 Persistent leaderboard
+Final score is calculated using completion time and number of moves:
+
+```text
+Score = max(0, 10000 - (Time × 10) - (Moves × 50))
+```
+
+Higher scores indicate faster and more efficient puzzle completion.
+
+---
+
+## 🏆 Future Enhancements
+
+- Online leaderboard
+- Multiplayer puzzle races
+- Mobile support
+- Gesture customization
+- Sound effects and music
+- Cloud score synchronization
+- Browser-based version using MediaPipe JavaScript
+
+---
+
+## 📸 Preview
+
+Gesture Puzzle combines computer vision and interactive gameplay to create a touchless puzzle-solving experience powered entirely by hand gestures.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+See the `LICENSE` file for details.
