@@ -5,12 +5,6 @@ No mouse. No keyboard. Just your hands.
 
 ---
 
-## 🎬 Demo
-
-▶️ [Watch v1 Demo](https://drive.google.com/file/d/1zRgMhcaL9ZyqrnTejsljVON1PPJveMRH/view?usp=drive_link)
-
----
-
 ## ✨ What's New in v2
 
 | Feature | v1 | v2 |
